@@ -1,0 +1,45 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.crazecoder.flutter.mintegral">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 如果国内流量版本SDK ，以下两条权限必须加上 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+    <application android:networkSecurityConfig="@xml/network_security_config"
+        tools:targetApi="n">
+        <activity
+            tools:replace="android:exported"
+            android:name="com.mintegral.msdk.activity.MTGCommonActivity"
+            android:configChanges="keyboard|orientation"
+            android:screenOrientation="portrait"
+            android:exported="false"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+        </activity>
+        <activity android:name=".SplashAdAbstractActivity"/>
+<!--        //非上架google play必需，上架google play可以不添加-->
+        <receiver android:name="com.mintegral.msdk.click.AppReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+<!--        //非上架google play必需，上架google play可以不添加-->
+        <service android:name="com.mintegral.msdk.shell.MTGService"
+            tools:ignore="Instantiatable">
+            <intent-filter>
+                <action android:name="com.mintegral.msdk.download.action" />
+            </intent-filter>
+        </service>
+<!--        //国内流量版本必需，海外版本可以不添加。-->
+        <provider
+            android:name="com.mintegral.msdk.base.utils.MTGFileProvider"
+            android:authorities="${applicationId}.mtgFileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/mtg_provider_paths"/>
+        </provider>
+    </application>
+</manifest>

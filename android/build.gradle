@@ -1,0 +1,55 @@
+group 'com.crazecoder.flutter.mintegral'
+version '1.0'
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.5.0'
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        minSdkVersion 16
+    }
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+}
+dependencies{
+    // 请将下方代码添加到项目的build.gradle中
+    implementation 'com.mintegral.msdk:mtgjscommon:14.4.41'
+    implementation 'com.mintegral.msdk:videocommon:14.4.41'
+    implementation 'com.mintegral.msdk:mtgsplash:14.4.41'
+    implementation 'com.mintegral.msdk:optimizedata:14.4.41'
+    implementation 'com.mintegral.msdk:common:14.4.41'
+    implementation 'com.mintegral.msdk:mtgbanner:14.4.41'
+    implementation 'com.mintegral.msdk:interstitial:14.4.41'
+    implementation 'com.mintegral.msdk:mtgnative:14.4.41'
+    implementation 'com.mintegral.msdk:nativeex:14.4.41'
+    implementation 'com.mintegral.msdk:playercommon:14.4.41'
+    implementation 'com.mintegral.msdk:videojs:14.4.41'
+    implementation 'com.mintegral.msdk:reward:14.4.41'
+    implementation 'com.mintegral.msdk:interstitialvideo:14.4.41'
+    implementation 'com.mintegral.msdk:mtgnativeadvanced:14.4.41'
+    implementation 'com.mintegral.msdk:appwall:14.4.41'
+    implementation 'com.mintegral.msdk:interactiveads:14.4.41'
+
+// 开发者后台创建App勾选APK为YES则加上mtgdownloads依赖
+    implementation 'com.mintegral.msdk:mtgdownloads:14.4.41'
+}
