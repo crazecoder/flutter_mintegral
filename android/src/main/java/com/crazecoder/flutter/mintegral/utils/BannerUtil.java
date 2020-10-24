@@ -21,24 +21,27 @@ public class BannerUtil implements BannerAdListener {
     private Map<String, MTGBannerView> cache;
     private static BannerUtil instance;
 
-    private BannerUtil(Activity activity) {
-        this.activity = activity;
+    private BannerUtil() {
         cache = new HashMap<>();
     }
 
-    public static BannerUtil getInstance(Activity activity) {
+    public static BannerUtil getInstance() {
         if (instance == null) {
-            instance = new BannerUtil(activity);
+            instance = new BannerUtil();
         }
         return instance;
     }
+    public BannerUtil setActivity(Activity activity){
+        this.activity = activity;
+        return instance;
+    }
 
-    public void getBanner(String placementId, String adUnitId) {
-        //创建横幅广告：adUnitId：开发者在讯飞AI营销云平台(http://www.voiceads.cn/)申请的横幅广告位 ID
+    public void createBanner(String placementId, String adUnitId) {
         MTGBannerView mtgBannerView = new MTGBannerView(activity);
         mtgBannerView.init(new BannerSize(BannerSize.DEV_SET_TYPE, 1294, 720), placementId, adUnitId);
         mtgBannerView.setAllowShowCloseBtn(true);
         mtgBannerView.setRefreshTime(15);
+        mtgBannerView.setBannerAdListener(this);
 
         cache.put(adUnitId, mtgBannerView);
 //        return bannerAd;
@@ -68,6 +71,7 @@ public class BannerUtil implements BannerAdListener {
 
             ViewGroup contentParent = (ViewGroup) (contentView.getParent());
             contentParent.removeView(contentView);
+            cache.remove(adUnitId);
         }
     }
 

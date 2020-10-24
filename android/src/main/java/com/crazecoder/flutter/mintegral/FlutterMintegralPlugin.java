@@ -91,12 +91,12 @@ public class FlutterMintegralPlugin implements FlutterPlugin, MethodCallHandler,
       String adUnitId = call.argument("adUnitId").toString();
       String placementId = call.argument("placementId").toString();
 
-      BannerUtil.getInstance(activity).getBanner(placementId,adUnitId);
-      BannerUtil.getInstance(activity).show(adUnitId);
+      BannerUtil.getInstance().setActivity(activity).createBanner(placementId,adUnitId);
+      BannerUtil.getInstance().show(adUnitId);
       result.success(null);
     } else if (call.method.equals("disposeBannerAD")) {
       String adUnitId = call.argument("adUnitId").toString();
-      BannerUtil.getInstance(activity).dispose(adUnitId);
+      BannerUtil.getInstance().dispose(adUnitId);
       result.success(null);
     } else {
       result.notImplemented();
