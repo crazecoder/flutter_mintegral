@@ -1,4 +1,4 @@
-package com.crazecoder.flutter.mintegral;
+package com.crazecoder.flutter.mintegral.activity;
 
 import android.Manifest;
 import android.annotation.TargetApi;
@@ -20,6 +20,8 @@ import android.widget.Toast;
 import androidx.annotation.DrawableRes;
 
 
+import com.crazecoder.flutter.mintegral.R;
+import com.mintegral.msdk.MIntegralConstans;
 import com.mintegral.msdk.MIntegralSDK;
 import com.mintegral.msdk.out.MIntegralSDKFactory;
 import com.mintegral.msdk.out.MTGSplashHandler;
@@ -39,6 +41,9 @@ public abstract class SplashAdAbstractActivity extends Activity {
     private String adUnitId;
     private String appId;
     private String appKey;
+    private String placementId;
+
+    private boolean isFlutterStart = false;
 
     private View adContainer;
 
@@ -57,13 +62,24 @@ public abstract class SplashAdAbstractActivity extends Activity {
 //            }
 //        }
         adContainer = this.findViewById(R.id.ad_container);
-        if (getLaunchBackground() != null)
-            adContainer.setBackground(getResources().getDrawable(getLaunchBackground()));
+
         appId = getIntent().getStringExtra("appId");
         appKey = getIntent().getStringExtra("appKey");
         adUnitId = getIntent().getStringExtra("adUnitId");
+        placementId = getIntent().getStringExtra("placementId");
+
+        int launchBackgroundId = getIntent().getIntExtra("launchBackgroundId", -1);
+        if (launchBackgroundId == -1 && getLaunchBackground() != null)
+            launchBackgroundId = getLaunchBackground();
+        if (launchBackgroundId != -1)
+            adContainer.setBackground(getResources().getDrawable(launchBackgroundId));
         if (TextUtils.isEmpty(appId)) {
             appId = getAppId();
+        } else {
+            isFlutterStart = true;
+        }
+        if (TextUtils.isEmpty(placementId)) {
+            placementId = getAdPlacementId();
         }
         if (TextUtils.isEmpty(appKey)) {
             appKey = getAppKey();
@@ -71,28 +87,37 @@ public abstract class SplashAdAbstractActivity extends Activity {
         if (TextUtils.isEmpty(adUnitId)) {
             adUnitId = getAdUnitId();
         }
+        if (isFlutterStart) {
+            fetchSplashAD();
+            return;
+        }
         // 如果targetSDKVersion >= 23，就要申请好权限。如果您的App没有适配到Android6.0（即targetSDKVersion < 23），那么只需要在这里直接调用fetchSplashAD接口。
         if (Build.VERSION.SDK_INT >= 23) {
             checkAndRequestPermission();
+        } else {
+            initSdk(appId, appKey);
         }
 
     }
-    private void initSdk(String appId,String appKey){
+
+    private void initSdk(String appId, String appKey) {
         MIntegralSDK sdk = MIntegralSDKFactory.getMIntegralSDK();
         Map<String, String> map = sdk.getMTGConfigurationMap(appId, appKey);
+        sdk.setConsentStatus(this, isProtectGDPR() ? MIntegralConstans.IS_SWITCH_OFF : MIntegralConstans.IS_SWITCH_ON);
 
         sdk.init(map, this, new SDKInitStatusListener() {
             @Override
             public void onInitSuccess() {
-                Log.e(TAG,"onInitSuccess");
+                Log.e(TAG, "onInitSuccess");
                 fetchSplashAD();
             }
 
             @Override
             public void onInitFail() {
-                Log.e(TAG,"onInitFail");
+                Log.e(TAG, "onInitFail");
             }
         });
+        sdk.setDoNotTrackStatus(isProtectCCPA());
     }
 
     /**
@@ -114,7 +139,7 @@ public abstract class SplashAdAbstractActivity extends Activity {
 
         // 权限都已经有了，那么直接调用SDK
         if (lackedPermission.size() == 0) {
-            initSdk(appId,appKey);
+            initSdk(appId, appKey);
         } else {
             // 请求所缺少的权限，在onRequestPermissionsResult中再看是否获得权限，如果获得权限就可以调用SDK，否则不要调用SDK。
             String[] requestPermissions = new String[lackedPermission.size()];
@@ -131,11 +156,12 @@ public abstract class SplashAdAbstractActivity extends Activity {
         }
         return true;
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == 1024 && hasAllPermissionsGranted(grantResults)) {
-            initSdk(appId,appKey);
+            initSdk(appId, appKey);
         } else {
             // 如果用户没有授权，那么应该说明意图，引导用户去设置里面授权。
             Toast.makeText(this, "应用缺少必要的权限！请点击\"权限\"，打开所需要的权限。", Toast.LENGTH_LONG).show();
@@ -150,9 +176,8 @@ public abstract class SplashAdAbstractActivity extends Activity {
      * 拉取开屏广告，开屏广告的构造方法有3种，详细说明请参考开发者文档。
      */
     private void fetchSplashAD() {
-        String placementId = getAdPlacementId();
-        if(TextUtils.isEmpty(placementId)){
-            Log.e(TAG,"error: placementId is null");
+        if (TextUtils.isEmpty(placementId)) {
+            Log.e(TAG, "error: placementId is null");
             finish();
             return;
         }
@@ -207,7 +232,7 @@ public abstract class SplashAdAbstractActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(mtgSplashHandler != null){
+        if (mtgSplashHandler != null) {
             mtgSplashHandler.onResume();
         }
     }
@@ -215,14 +240,14 @@ public abstract class SplashAdAbstractActivity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
-        if(mtgSplashHandler != null){
+        if (mtgSplashHandler != null) {
             mtgSplashHandler.onPause();
         }
     }
 
     @Override
     protected void onDestroy() {
-        if(mtgSplashHandler != null){
+        if (mtgSplashHandler != null) {
             mtgSplashHandler.onDestroy();
         }
         super.onDestroy();
@@ -246,6 +271,10 @@ public abstract class SplashAdAbstractActivity extends Activity {
     protected abstract String getAdUnitId();
 
     protected abstract String getAdPlacementId();
+
+    protected abstract boolean isProtectGDPR();
+
+    protected abstract boolean isProtectCCPA();
 
     protected abstract @DrawableRes
     Integer getLaunchBackground();

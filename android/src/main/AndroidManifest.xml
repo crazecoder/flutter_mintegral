@@ -7,7 +7,9 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
     <application android:networkSecurityConfig="@xml/network_security_config"
+        android:hardwareAccelerated="true"
         tools:targetApi="n">
+        <activity android:name=".activity.SplashAdActivity"/>
         <activity
             tools:replace="android:exported"
             android:name="com.mintegral.msdk.activity.MTGCommonActivity"
@@ -16,7 +18,12 @@
             android:exported="false"
             android:theme="@android:style/Theme.Translucent.NoTitleBar">
         </activity>
-        <activity android:name=".SplashAdAbstractActivity"/>
+        <activity
+            android:name="com.mintegral.msdk.reward.player.MTGRewardVideoActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="false"
+            tools:replace="android:theme"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
 <!--        //非上架google play必需，上架google play可以不添加-->
         <receiver android:name="com.mintegral.msdk.click.AppReceiver" >
             <intent-filter>
