@@ -6,7 +6,7 @@
     <!-- 如果国内流量版本SDK ，以下两条权限必须加上 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
-    <application android:networkSecurityConfig="@xml/network_security_config"
+    <application android:usesCleartextTraffic="true"
         android:hardwareAccelerated="true"
         tools:targetApi="n">
         <activity android:name=".activity.SplashAdActivity"/>
