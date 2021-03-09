@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -17,10 +18,10 @@ import com.crazecoder.flutter.mintegral.utils.BannerUtil;
 import com.crazecoder.flutter.mintegral.utils.InteractiveAdUtil;
 import com.crazecoder.flutter.mintegral.utils.InterstitialVideoUtil;
 import com.crazecoder.flutter.mintegral.utils.RewardVideoUtil;
-import com.mintegral.msdk.MIntegralConstans;
-import com.mintegral.msdk.MIntegralSDK;
-import com.mintegral.msdk.out.MIntegralSDKFactory;
-import com.mintegral.msdk.out.SDKInitStatusListener;
+import com.mbridge.msdk.MBridgeConstans;
+import com.mbridge.msdk.MBridgeSDK;
+import com.mbridge.msdk.out.MBridgeSDKFactory;
+import com.mbridge.msdk.out.SDKInitStatusListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,11 +95,22 @@ public class FlutterMintegralPlugin implements FlutterPlugin, MethodCallHandler,
                 String appId = call.argument("appId");
                 String appKey = call.argument("appKey");
 
-                MIntegralSDK sdk = MIntegralSDKFactory.getMIntegralSDK();
-                Map<String, String> map = sdk.getMTGConfigurationMap(appId, appKey);
+                MBridgeSDK sdk = MBridgeSDKFactory.getMBridgeSDK();
+                Map<String, String> map = sdk.getMBConfigurationMap(appId, appKey);
                 boolean isProtectGDPR = call.argument("isProtectGDPR");
-                sdk.setConsentStatus(activity, isProtectGDPR ? MIntegralConstans.IS_SWITCH_OFF : MIntegralConstans.IS_SWITCH_ON);
-                sdk.init(map, context);
+                sdk.setConsentStatus(activity, isProtectGDPR ? MBridgeConstans.IS_SWITCH_OFF : MBridgeConstans.IS_SWITCH_ON);
+//                sdk.init(map, context);
+                sdk.init(map, context, new SDKInitStatusListener() {
+                    @Override
+                    public void onInitSuccess() {
+                        Log.e("SDKInitStatus", "onInitSuccess");
+                    }
+
+                    @Override
+                    public void onInitFail() {
+                        Log.e("SDKInitStatus", "onInitFail");
+                    }
+                });
                 boolean isProtectCCPA = call.argument("isProtectCCPA");
                 sdk.setDoNotTrackStatus(isProtectCCPA);
             }

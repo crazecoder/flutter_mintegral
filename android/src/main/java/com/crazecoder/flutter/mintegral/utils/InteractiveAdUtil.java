@@ -2,9 +2,10 @@ package com.crazecoder.flutter.mintegral.utils;
 
 import android.app.Activity;
 
-import com.mintegral.msdk.MIntegralConstans;
-import com.mintegral.msdk.interactiveads.out.InteractiveAdsListener;
-import com.mintegral.msdk.interactiveads.out.MTGInteractiveHandler;
+
+import com.mbridge.msdk.MBridgeConstans;
+import com.mbridge.msdk.interactiveads.out.InteractiveAdsListener;
+import com.mbridge.msdk.interactiveads.out.MBInteractiveHandler;
 
 import java.util.HashMap;
 
@@ -14,7 +15,7 @@ public class InteractiveAdUtil {
     private static final String TAG = "InteractiveAdUtil";
 
     private static InteractiveAdUtil instance;
-    private MTGInteractiveHandler mInterstitialHandler;
+    private MBInteractiveHandler mInterstitialHandler;
     private Activity activity;
 
 
@@ -38,9 +39,9 @@ public class InteractiveAdUtil {
     private void initHandler(String adUnitId,String placementId) {
         HashMap<String, Object> hashMap = new HashMap<String, Object>();
         // 设置广告位ID
-        hashMap.put(MIntegralConstans.PROPERTIES_UNIT_ID, adUnitId);
-        hashMap.put(MIntegralConstans.PLACEMENT_ID, placementId);
-        mInterstitialHandler = new MTGInteractiveHandler(activity, hashMap);
+        hashMap.put(MBridgeConstans.PROPERTIES_UNIT_ID, adUnitId);
+        hashMap.put(MBridgeConstans.PLACEMENT_ID, placementId);
+        mInterstitialHandler = new MBInteractiveHandler(activity, hashMap);
         mInterstitialHandler.setInteractiveAdsListener(new InteractiveAdsListener() {
             @Override
             public void onInteractivelLoadSuccess(int restype) {

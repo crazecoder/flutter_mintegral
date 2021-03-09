@@ -10,43 +10,5 @@
         android:hardwareAccelerated="true"
         tools:targetApi="n">
         <activity android:name=".activity.SplashAdActivity"/>
-        <activity
-            tools:replace="android:exported"
-            android:name="com.mintegral.msdk.activity.MTGCommonActivity"
-            android:configChanges="keyboard|orientation"
-            android:screenOrientation="portrait"
-            android:exported="false"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar">
-        </activity>
-        <activity
-            android:name="com.mintegral.msdk.reward.player.MTGRewardVideoActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:exported="false"
-            tools:replace="android:theme"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-<!--        //非上架google play必需，上架google play可以不添加-->
-        <receiver android:name="com.mintegral.msdk.click.AppReceiver" >
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_ADDED" />
-                <data android:scheme="package" />
-            </intent-filter>
-        </receiver>
-<!--        //非上架google play必需，上架google play可以不添加-->
-        <service android:name="com.mintegral.msdk.shell.MTGService"
-            tools:ignore="Instantiatable">
-            <intent-filter>
-                <action android:name="com.mintegral.msdk.download.action" />
-            </intent-filter>
-        </service>
-<!--        //国内流量版本必需，海外版本可以不添加。-->
-        <provider
-            android:name="com.mintegral.msdk.base.utils.MTGFileProvider"
-            android:authorities="${applicationId}.mtgFileProvider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/mtg_provider_paths"/>
-        </provider>
     </application>
 </manifest>

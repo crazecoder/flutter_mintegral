@@ -4,10 +4,11 @@ import android.app.Activity;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 
-import com.mintegral.msdk.MIntegralConstans;
-import com.mintegral.msdk.interstitialvideo.out.InterstitialVideoListener;
-import com.mintegral.msdk.interstitialvideo.out.MTGInterstitialVideoHandler;
-import com.mintegral.msdk.videocommon.download.NetStateOnReceive;
+
+import com.mbridge.msdk.MBridgeConstans;
+import com.mbridge.msdk.interstitialvideo.out.InterstitialVideoListener;
+import com.mbridge.msdk.interstitialvideo.out.MBInterstitialVideoHandler;
+import com.mbridge.msdk.videocommon.download.NetStateOnReceive;
 
 import io.flutter.Log;
 
@@ -15,7 +16,7 @@ import io.flutter.Log;
 public class InterstitialVideoUtil {
     private static final String TAG = "InterstitialVideoUtil";
     private static InterstitialVideoUtil instance;
-    private MTGInterstitialVideoHandler mMtgInterstitalVideoHandler;
+    private MBInterstitialVideoHandler mMtgInterstitalVideoHandler;
     private NetStateOnReceive mNetStateOnReceive;
     private Activity activity;
 
@@ -52,7 +53,7 @@ public class InterstitialVideoUtil {
                 activity.registerReceiver(mNetStateOnReceive, filter);
             }
 
-            mMtgInterstitalVideoHandler = new MTGInterstitialVideoHandler(activity, placementId, adUnitId);
+            mMtgInterstitalVideoHandler = new MBInterstitialVideoHandler(activity, placementId, adUnitId);
             mMtgInterstitalVideoHandler.setInterstitialVideoListener(new InterstitialVideoListener() {
 
                 @Override
@@ -118,15 +119,15 @@ public class InterstitialVideoUtil {
                     Log.e(TAG, "onAdCloseWithIVReward");
                     Log.e(TAG, isComplete ? "Video playback/playable is complete." : "Video playback/playable is not complete.");
 
-                    if (rewardAlertStatus == MIntegralConstans.IVREWARDALERT_STATUS_NOTSHOWN) {
+                    if (rewardAlertStatus == MBridgeConstans.IVREWARDALERT_STATUS_NOTSHOWN) {
                         Log.e(TAG, "The dialog is not show.");
                     }
 
-                    if (rewardAlertStatus == MIntegralConstans.IVREWARDALERT_STATUS_CLICKCONTINUE) {
+                    if (rewardAlertStatus == MBridgeConstans.IVREWARDALERT_STATUS_CLICKCONTINUE) {
                         Log.e(TAG, "The dialog's continue button clicked.");
                     }
 
-                    if (rewardAlertStatus == MIntegralConstans.IVREWARDALERT_STATUS_CLICKCANCEL) {
+                    if (rewardAlertStatus == MBridgeConstans.IVREWARDALERT_STATUS_CLICKCANCEL) {
                         Log.e(TAG, "The dialog's cancel button clicked.");
                     }
                 }

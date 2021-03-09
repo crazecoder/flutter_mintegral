@@ -19,9 +19,15 @@ rootProject.allprojects {
     repositories {
         google()
         jcenter()
-        maven{
-            url "https://dl.bintray.com/mintegral-official/Mintegral_ad_SDK_Android"
+        //非上架GP市场应用 安卓X版本
+        maven {
+            url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_china"
         }
+
+        //上架GP市场应用 安卓X版本
+//        maven {
+//            url  "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea"
+//        }
     }
 }
 
@@ -39,24 +45,37 @@ android {
     }
 }
 dependencies{
-    // 请将下方代码添加到项目的build.gradle中
-    implementation 'com.mintegral.msdk:mtgjscommon:14.6.01'
-    implementation 'com.mintegral.msdk:videocommon:14.6.01'
-    implementation 'com.mintegral.msdk:interactiveads:14.6.01'
-    implementation 'com.mintegral.msdk:optimizedata:14.6.01'
-    implementation 'com.mintegral.msdk:common:14.6.01'
-    implementation 'com.mintegral.msdk:mtgbanner:14.6.01'
-    implementation 'com.mintegral.msdk:appwall:14.6.01'
-    implementation 'com.mintegral.msdk:mtgnativeadvanced:14.6.01'
-    implementation 'com.mintegral.msdk:videojs:14.6.01'
-    implementation 'com.mintegral.msdk:playercommon:14.6.01'
-    implementation 'com.mintegral.msdk:reward:14.6.01'
-    implementation 'com.mintegral.msdk:interstitialvideo:14.6.01'
-    implementation 'com.mintegral.msdk:mtgnative:14.6.01'
-    implementation 'com.mintegral.msdk:nativeex:14.6.01'
-    implementation 'com.mintegral.msdk:interstitial:14.6.01'
-    implementation 'com.mintegral.msdk:mtgsplash:14.6.01'
+    // google play
+//    implementation 'com.mbridge.msdk.oversea:videojs:15.4.61'
+//    implementation 'com.mbridge.msdk.oversea:mbjscommon:15.4.61'
+//    implementation 'com.mbridge.msdk.oversea:playercommon:15.4.61'
+//    implementation 'com.mbridge.msdk.oversea:reward:15.4.61'
+//    implementation 'com.mbridge.msdk.oversea:videocommon:15.4.61'
+//    implementation 'com.mbridge.msdk.oversea:same:15.4.61'
+//    implementation 'com.mbridge.msdk.oversea:interstitialvideo:15.4.61'
+//    implementation 'com.mbridge.msdk.oversea:mbnative:15.4.61'
+//    implementation 'com.mbridge.msdk.oversea:nativeex:15.4.61'
+//    implementation 'com.mbridge.msdk.oversea:interstitial:15.4.61'
+//    implementation 'com.mbridge.msdk.oversea:mbsplash:15.4.61'
+//    implementation 'com.mbridge.msdk.oversea:mbnativeadvanced:15.4.61'
+//    implementation 'com.mbridge.msdk.oversea:mbbanner:15.4.61'
+//    implementation 'com.mbridge.msdk.oversea:interactiveads:15.4.61'
+    // china store
+    implementation 'com.mbridge.msdk.china:videojs:15.4.62'
+    implementation 'com.mbridge.msdk.china:mbjscommon:15.4.62'
+    implementation 'com.mbridge.msdk.china:playercommon:15.4.62'
+    implementation 'com.mbridge.msdk.china:reward:15.4.62'
+    implementation 'com.mbridge.msdk.china:videocommon:15.4.62'
+    implementation 'com.mbridge.msdk.china:chinasame:15.4.62'
+    implementation 'com.mbridge.msdk.china:interstitialvideo:15.4.62'
+    implementation 'com.mbridge.msdk.china:mbnative:15.4.62'
+    implementation 'com.mbridge.msdk.china:nativeex:15.4.62'
+    implementation 'com.mbridge.msdk.china:interstitial:15.4.62'
+    implementation 'com.mbridge.msdk.china:mbsplash:15.4.62'
+    implementation 'com.mbridge.msdk.china:mbnativeadvanced:15.4.62'
+    implementation 'com.mbridge.msdk.china:mbbanner:15.4.62'
+    implementation 'com.mbridge.msdk.china:interactiveads:15.4.62'
 
     // 开发者后台创建App勾选APK为YES则加上mtgdownloads依赖
-    implementation 'com.mintegral.msdk:mtgdownloads:14.6.01'
+//    implementation 'com.mintegral.msdk:mtgdownloads:14.6.01'
 }

@@ -21,13 +21,13 @@ import androidx.annotation.DrawableRes;
 
 
 import com.crazecoder.flutter.mintegral.R;
-import com.mintegral.msdk.MIntegralConstans;
-import com.mintegral.msdk.MIntegralSDK;
-import com.mintegral.msdk.out.MIntegralSDKFactory;
-import com.mintegral.msdk.out.MTGSplashHandler;
-import com.mintegral.msdk.out.MTGSplashLoadListener;
-import com.mintegral.msdk.out.MTGSplashShowListener;
-import com.mintegral.msdk.out.SDKInitStatusListener;
+import com.mbridge.msdk.MBridgeConstans;
+import com.mbridge.msdk.MBridgeSDK;
+import com.mbridge.msdk.out.MBSplashHandler;
+import com.mbridge.msdk.out.MBSplashLoadListener;
+import com.mbridge.msdk.out.MBSplashShowListener;
+import com.mbridge.msdk.out.MBridgeSDKFactory;
+import com.mbridge.msdk.out.SDKInitStatusListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +37,7 @@ import io.flutter.Log;
 
 public abstract class SplashAdAbstractActivity extends Activity {
     private static final String TAG = "SplashAbstractActivity";
-    private MTGSplashHandler mtgSplashHandler;
+    private MBSplashHandler mtgSplashHandler;
     private String adUnitId;
     private String appId;
     private String appKey;
@@ -101,9 +101,9 @@ public abstract class SplashAdAbstractActivity extends Activity {
     }
 
     private void initSdk(String appId, String appKey) {
-        MIntegralSDK sdk = MIntegralSDKFactory.getMIntegralSDK();
-        Map<String, String> map = sdk.getMTGConfigurationMap(appId, appKey);
-        sdk.setConsentStatus(this, isProtectGDPR() ? MIntegralConstans.IS_SWITCH_OFF : MIntegralConstans.IS_SWITCH_ON);
+        MBridgeSDK sdk = MBridgeSDKFactory.getMBridgeSDK();
+        Map<String, String> map = sdk.getMBConfigurationMap(appId, appKey);
+        sdk.setConsentStatus(this, isProtectGDPR() ? MBridgeConstans.IS_SWITCH_OFF : MBridgeConstans.IS_SWITCH_ON);
 
         sdk.init(map, this, new SDKInitStatusListener() {
             @Override
@@ -181,10 +181,10 @@ public abstract class SplashAdAbstractActivity extends Activity {
             finish();
             return;
         }
-        mtgSplashHandler = new MTGSplashHandler(placementId, adUnitId);
+        mtgSplashHandler = new MBSplashHandler(placementId, adUnitId);
         mtgSplashHandler.setLoadTimeOut(10);
 //        mtgSplashHandler.setLogoView(textView, 100, 100);
-        mtgSplashHandler.setSplashLoadListener(new MTGSplashLoadListener() {
+        mtgSplashHandler.setSplashLoadListener(new MBSplashLoadListener() {
             @Override
             public void onLoadSuccessed(int reqType) {
                 Log.e(TAG, "onLoadSuccessed" + reqType);
@@ -197,7 +197,7 @@ public abstract class SplashAdAbstractActivity extends Activity {
             }
         });
 
-        mtgSplashHandler.setSplashShowListener(new MTGSplashShowListener() {
+        mtgSplashHandler.setSplashShowListener(new MBSplashShowListener() {
             @Override
             public void onShowSuccessed() {
                 Log.e(TAG, "onShowSuccessed");

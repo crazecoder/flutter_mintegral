@@ -5,9 +5,10 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.text.TextUtils;
 
-import com.mintegral.msdk.out.MTGRewardVideoHandler;
-import com.mintegral.msdk.out.RewardVideoListener;
-import com.mintegral.msdk.videocommon.download.NetStateOnReceive;
+
+import com.mbridge.msdk.out.MBRewardVideoHandler;
+import com.mbridge.msdk.out.RewardVideoListener;
+import com.mbridge.msdk.videocommon.download.NetStateOnReceive;
 
 import io.flutter.Log;
 
@@ -15,7 +16,7 @@ import io.flutter.Log;
 public class RewardVideoUtil {
     private static final String TAG = "RewardVideoUtil";
     private static RewardVideoUtil instance;
-    private MTGRewardVideoHandler mMTGRewardVideoHandler;
+    private MBRewardVideoHandler mMTGRewardVideoHandler;
     private NetStateOnReceive mNetStateOnReceive;
     private Activity activity;
 
@@ -53,8 +54,8 @@ public class RewardVideoUtil {
                 activity.registerReceiver(mNetStateOnReceive, filter);
             }
 
-            //mMTGRewardVideoHandler = new MTGRewardVideoHandler(this, mRewardUnitId);
-            mMTGRewardVideoHandler = MIntegralSDKManager.getInstance().createRewardVideoHandler(activity, placementId, adUnitId);
+            mMTGRewardVideoHandler = new MBRewardVideoHandler(activity, placementId,adUnitId);
+//            mMTGRewardVideoHandler = MIntegralSDKManager.getInstance().createRewardVideoHandler(activity, placementId, adUnitId);
 
             mMTGRewardVideoHandler.setRewardVideoListener(new RewardVideoListener() {
 

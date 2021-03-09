@@ -8,9 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.mintegral.msdk.out.BannerAdListener;
-import com.mintegral.msdk.out.BannerSize;
-import com.mintegral.msdk.out.MTGBannerView;
+
+import com.mbridge.msdk.out.BannerAdListener;
+import com.mbridge.msdk.out.BannerSize;
+import com.mbridge.msdk.out.MBBannerView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +19,7 @@ import java.util.Map;
 public class BannerUtil implements BannerAdListener {
     private static final String TAG = "BannerUtil";
     private Activity activity;
-    private Map<String, MTGBannerView> cache;
+    private Map<String, MBBannerView> cache;
     private static BannerUtil instance;
 
     private BannerUtil() {
@@ -37,7 +38,7 @@ public class BannerUtil implements BannerAdListener {
     }
 
     public void createBanner(String placementId, String adUnitId) {
-        MTGBannerView mtgBannerView = new MTGBannerView(activity);
+        MBBannerView mtgBannerView = new MBBannerView(activity);
         mtgBannerView.init(new BannerSize(BannerSize.DEV_SET_TYPE, 1294, 720), placementId, adUnitId);
         mtgBannerView.setAllowShowCloseBtn(true);
         mtgBannerView.setRefreshTime(15);
@@ -48,7 +49,7 @@ public class BannerUtil implements BannerAdListener {
     }
 
     public void show(String adUnitId) {
-        MTGBannerView bannerAd = cache.get(adUnitId);
+        MBBannerView bannerAd = cache.get(adUnitId);
         if (bannerAd != null) {
             bannerAd.load();
             LinearLayout content = new LinearLayout(activity);
@@ -63,7 +64,7 @@ public class BannerUtil implements BannerAdListener {
     }
 
     public void dispose(String adUnitId) {
-        MTGBannerView bannerAd = cache.get(adUnitId);
+        MBBannerView bannerAd = cache.get(adUnitId);
         if (bannerAd != null) {
             bannerAd.release();
             View contentView = (View) bannerAd.getParent();
