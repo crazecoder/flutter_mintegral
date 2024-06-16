@@ -7,8 +7,8 @@ class FlutterMintegral {
       const MethodChannel('flutter_mintegral');
 
   static Future<Null> initSdk({
-    String appId,
-    String appKey,
+    required String appId,
+    required String appKey,
     /**
       * for EU-GDPR
       * false: MIntegralConstans.IS_SWITCH_ON
@@ -20,9 +20,7 @@ class FlutterMintegral {
       */
     bool isProtectCCPA = false,
   }) async {
-    assert(appId != null &&
-        appId.isNotEmpty &&
-        appKey != null &&
+    assert(appId.isNotEmpty &&
         appKey.isNotEmpty);
     Map map = {
       "appId": appId,
@@ -34,11 +32,10 @@ class FlutterMintegral {
   }
 
   static Future<Null> startSplashAd({
-    String adUnitId,
-    String placementId,
-    String launchBackgroundId,
+    required String adUnitId,
+    required String placementId,
+    String? launchBackgroundId,
   }) async {
-    assert(adUnitId != null && placementId != null);
     Map map = {
       "adUnitId": adUnitId,
       "placementId": placementId,
@@ -48,23 +45,21 @@ class FlutterMintegral {
     await _channel.invokeMethod('startSplashAd', map);
   }
 
-  static Future<Null> showInteractiveAD({
-    String adUnitId,
-    String placementId,
-  }) async {
-    assert(adUnitId != null && placementId != null);
-    Map map = {
-      "adUnitId": adUnitId,
-      "placementId": placementId,
-    };
-    await _channel.invokeMethod('showInteractiveAD', map);
-  }
+  // static Future<Null> showInteractiveAD({
+  //   required String adUnitId,
+  //   required String placementId,
+  // }) async {
+  //   Map map = {
+  //     "adUnitId": adUnitId,
+  //     "placementId": placementId,
+  //   };
+  //   await _channel.invokeMethod('showInteractiveAD', map);
+  // }
 
   static Future<Null> showInterstitialVideoAD({
-    String adUnitId,
-    String placementId,
+    required String adUnitId,
+    required String placementId,
   }) async {
-    assert(adUnitId != null && placementId != null);
     Map map = {
       "adUnitId": adUnitId,
       "placementId": placementId,
@@ -74,12 +69,11 @@ class FlutterMintegral {
   
 
   static Future<Null> showRewardVideoAD({
-    String adUnitId,
-    String placementId,
-    String userId,
-    String rewardId,
+    required String adUnitId,
+    required String placementId,
+    String? userId,
+    String? rewardId,
   }) async {
-    assert(adUnitId != null && placementId != null);
     Map map = {
       "adUnitId": adUnitId,
       "placementId": placementId,
@@ -90,8 +84,7 @@ class FlutterMintegral {
   }
 
   static Future<Null> showBannerAD(
-      {String adUnitId, String placementId}) async {
-    assert(adUnitId != null && placementId != null);
+      {required String adUnitId, required String placementId}) async {
     Map map = {
       "adUnitId": adUnitId,
       "placementId": placementId,
@@ -99,8 +92,7 @@ class FlutterMintegral {
     await _channel.invokeMethod('showBannerAD', map);
   }
 
-  static Future<Null> disposeBannerAD({String adUnitId}) async {
-    assert(adUnitId != null);
+  static Future<Null> disposeBannerAD({required String adUnitId}) async {
     Map map = {
       "adUnitId": adUnitId,
     };

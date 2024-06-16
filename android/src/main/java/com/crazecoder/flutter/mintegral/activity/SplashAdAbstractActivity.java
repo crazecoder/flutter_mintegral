@@ -26,6 +26,7 @@ import com.mbridge.msdk.MBridgeSDK;
 import com.mbridge.msdk.out.MBSplashHandler;
 import com.mbridge.msdk.out.MBSplashLoadListener;
 import com.mbridge.msdk.out.MBSplashShowListener;
+import com.mbridge.msdk.out.MBridgeIds;
 import com.mbridge.msdk.out.MBridgeSDKFactory;
 import com.mbridge.msdk.out.SDKInitStatusListener;
 
@@ -113,8 +114,8 @@ public abstract class SplashAdAbstractActivity extends Activity {
             }
 
             @Override
-            public void onInitFail() {
-                Log.e(TAG, "onInitFail");
+            public void onInitFail(String msg) {
+                Log.e(TAG, "onInitFail:"+msg);
             }
         });
         sdk.setDoNotTrackStatus(isProtectCCPA());
@@ -186,43 +187,58 @@ public abstract class SplashAdAbstractActivity extends Activity {
 //        mtgSplashHandler.setLogoView(textView, 100, 100);
         mtgSplashHandler.setSplashLoadListener(new MBSplashLoadListener() {
             @Override
-            public void onLoadSuccessed(int reqType) {
+            public void onLoadSuccessed(MBridgeIds ids, int reqType) {
                 Log.e(TAG, "onLoadSuccessed" + reqType);
             }
 
             @Override
-            public void onLoadFailed(String msg, int reqType) {
+            public void onLoadFailed(MBridgeIds ids,String msg, int reqType) {
                 Log.e(TAG, "onLoadFailed" + msg + reqType);
                 finish();
+            }
+
+            @Override
+            public void isSupportZoomOut(MBridgeIds mBridgeIds, boolean b) {
+                Log.e(TAG, "isSupportZoomOut:" +b);
             }
         });
 
         mtgSplashHandler.setSplashShowListener(new MBSplashShowListener() {
             @Override
-            public void onShowSuccessed() {
+            public void onShowSuccessed(MBridgeIds ids) {
                 Log.e(TAG, "onShowSuccessed");
             }
 
             @Override
-            public void onShowFailed(String msg) {
+            public void onShowFailed(MBridgeIds ids,String msg) {
                 Log.e(TAG, "onShowFailed" + msg);
                 finish();
             }
 
             @Override
-            public void onAdClicked() {
+            public void onAdClicked(MBridgeIds ids) {
                 Log.e(TAG, "onAdClicked");
             }
 
             @Override
-            public void onDismiss(int type) {
+            public void onDismiss(MBridgeIds ids,int type) {
                 Log.e(TAG, "onDismiss" + type);
                 finish();
             }
 
             @Override
-            public void onAdTick(long millisUntilFinished) {
+            public void onAdTick(MBridgeIds ids,long millisUntilFinished) {
                 Log.e(TAG, "onAdTick" + millisUntilFinished);
+            }
+
+            @Override
+            public void onZoomOutPlayStart(MBridgeIds mBridgeIds) {
+                Log.e(TAG, "onZoomOutPlayStart");
+            }
+
+            @Override
+            public void onZoomOutPlayFinish(MBridgeIds mBridgeIds) {
+                Log.e(TAG, "onZoomOutPlayFinish");
             }
         });
 

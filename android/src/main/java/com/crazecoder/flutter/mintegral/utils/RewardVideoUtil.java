@@ -7,6 +7,8 @@ import android.text.TextUtils;
 
 
 import com.mbridge.msdk.out.MBRewardVideoHandler;
+import com.mbridge.msdk.out.MBridgeIds;
+import com.mbridge.msdk.out.RewardInfo;
 import com.mbridge.msdk.out.RewardVideoListener;
 import com.mbridge.msdk.videocommon.download.NetStateOnReceive;
 
@@ -60,51 +62,51 @@ public class RewardVideoUtil {
             mMTGRewardVideoHandler.setRewardVideoListener(new RewardVideoListener() {
 
                 @Override
-                public void onLoadSuccess(String placementId, String unitId) {
-                    Log.e(TAG, "onLoadSuccess: " + (TextUtils.isEmpty(placementId) ? "" : placementId) + "  " + unitId);
+                public void onLoadSuccess(MBridgeIds ids) {
+                    Log.e(TAG, "onLoadSuccess: " + (TextUtils.isEmpty(placementId) ? "" : placementId) + "  " + ids.getUnitId());
                 }
 
                 @Override
-                public void onVideoLoadSuccess(String placementId, String unitId) {
-                    Log.e(TAG, "onVideoLoadSuccess: " + (TextUtils.isEmpty(placementId) ? "" : placementId) + "  " + unitId);
+                public void onVideoLoadSuccess(MBridgeIds ids) {
+                    Log.e(TAG, "onVideoLoadSuccess: " + (TextUtils.isEmpty(placementId) ? "" : placementId) + "  " + ids.getUnitId());
                     if (mMTGRewardVideoHandler.isReady()) {
                         mMTGRewardVideoHandler.show(rewardId, userId);
                     }
                 }
 
                 @Override
-                public void onVideoLoadFail(String errorMsg) {
+                public void onVideoLoadFail(MBridgeIds ids,String errorMsg) {
                     Log.e(TAG, "onVideoLoadFail errorMsg: " + errorMsg);
                 }
 
                 @Override
-                public void onShowFail(String errorMsg) {
+                public void onShowFail(MBridgeIds ids,String errorMsg) {
                     Log.e(TAG, "onShowFail: " + errorMsg);
                 }
 
                 @Override
-                public void onAdShow() {
+                public void onAdShow(MBridgeIds ids) {
                     Log.e(TAG, "onAdShow");
                 }
 
                 @Override
-                public void onAdClose(boolean isCompleteView, String RewardName, float RewardAmout) {
-                    Log.e(TAG, "onAdClose rewardinfo : " + "RewardName:" + RewardName + "RewardAmout:" + RewardAmout + " isCompleteView：" + isCompleteView);
+                public void onAdClose(MBridgeIds ids, RewardInfo rewardInfo) {
+                    Log.e(TAG, "onAdClose rewardinfo : " + "RewardName:" + rewardInfo.getRewardName() + "RewardAmout:" + rewardInfo.getRewardAmount() + " isCompleteView：" + rewardInfo.isCompleteView());
                 }
 
                 @Override
-                public void onVideoAdClicked(String placementId, String unitId) {
-                    Log.e(TAG, "onVideoAdClicked : " + (TextUtils.isEmpty(placementId) ? "" : placementId) + "  " + unitId);
+                public void onVideoAdClicked(MBridgeIds ids) {
+                    Log.e(TAG, "onVideoAdClicked : " + (TextUtils.isEmpty(placementId) ? "" : placementId) + "  " + ids.getUnitId());
                 }
 
                 @Override
-                public void onVideoComplete(String placementId, String unitId) {
-                    Log.e(TAG, "onVideoComplete : " + (TextUtils.isEmpty(placementId) ? "" : placementId) + "  " + unitId);
+                public void onVideoComplete(MBridgeIds ids) {
+                    Log.e(TAG, "onVideoComplete : " + (TextUtils.isEmpty(placementId) ? "" : placementId) + "  " + ids.getUnitId());
                 }
 
                 @Override
-                public void onEndcardShow(String placementId, String unitId) {
-                    Log.e(TAG, "onEndcardShow : " + (TextUtils.isEmpty(placementId) ? "" : placementId) + "  " + unitId);
+                public void onEndcardShow(MBridgeIds ids) {
+                    Log.e(TAG, "onEndcardShow : " + (TextUtils.isEmpty(placementId) ? "" : placementId) + "  " + ids.getUnitId());
                 }
 
             });

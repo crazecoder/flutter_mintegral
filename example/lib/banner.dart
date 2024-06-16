@@ -7,24 +7,21 @@ class BannerAdHome extends StatefulWidget {
 }
 
 class _BannerAdHomeState extends State<BannerAdHome> {
-
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Text(
-        "streamController: _streamController",
-      ),
-    );
-  }
+  Widget build(BuildContext context) => Scaffold(
+        body: Text(
+          "streamController: _streamController",
+        ),
+      );
+      
   void initState() {
     super.initState();
-    FlutterMintegral.showBannerAD(
-        adUnitId: "146879",placementId: "138791");
+    FlutterMintegral.showBannerAD(adUnitId: "146879", placementId: "138791");
   }
+
   @override
   void dispose() {
-    FlutterMintegral.disposeBannerAD(
-        adUnitId: "146879");
+    FlutterMintegral.disposeBannerAD(adUnitId: "146879");
     super.dispose();
   }
 }

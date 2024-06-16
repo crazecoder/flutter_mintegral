@@ -4,10 +4,11 @@ version '1.0'
 buildscript {
     repositories {
         google()
-        jcenter()
-        maven{
-            url "https://dl.bintray.com/mintegral-official/Mintegral_ad_SDK_Android"
+        mavenCentral()
+        maven {
+            url  "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea"
         }
+
     }
 
     dependencies {
@@ -18,10 +19,9 @@ buildscript {
 rootProject.allprojects {
     repositories {
         google()
-        jcenter()
-        //非上架GP市场应用 安卓X版本
+        mavenCentral()
         maven {
-            url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_china"
+            url  "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea"
         }
 
         //上架GP市场应用 安卓X版本
@@ -34,7 +34,7 @@ rootProject.allprojects {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 28
+    compileSdk 31
 
     defaultConfig {
         minSdkVersion 16
@@ -46,35 +46,29 @@ android {
 }
 dependencies{
     // google play
-//    implementation 'com.mbridge.msdk.oversea:videojs:15.4.61'
-//    implementation 'com.mbridge.msdk.oversea:mbjscommon:15.4.61'
-//    implementation 'com.mbridge.msdk.oversea:playercommon:15.4.61'
-//    implementation 'com.mbridge.msdk.oversea:reward:15.4.61'
-//    implementation 'com.mbridge.msdk.oversea:videocommon:15.4.61'
-//    implementation 'com.mbridge.msdk.oversea:same:15.4.61'
-//    implementation 'com.mbridge.msdk.oversea:interstitialvideo:15.4.61'
-//    implementation 'com.mbridge.msdk.oversea:mbnative:15.4.61'
-//    implementation 'com.mbridge.msdk.oversea:nativeex:15.4.61'
-//    implementation 'com.mbridge.msdk.oversea:interstitial:15.4.61'
-//    implementation 'com.mbridge.msdk.oversea:mbsplash:15.4.61'
-//    implementation 'com.mbridge.msdk.oversea:mbnativeadvanced:15.4.61'
-//    implementation 'com.mbridge.msdk.oversea:mbbanner:15.4.61'
-//    implementation 'com.mbridge.msdk.oversea:interactiveads:15.4.61'
+    implementation 'com.mbridge.msdk.oversea:reward:16.7.51'
+    //如果您需要使用竞价广告,请添加此条依赖语句。(mbbid)
+    implementation 'com.mbridge.msdk.oversea:mbbid:16.7.51'
+    implementation 'com.mbridge.msdk.oversea:mbnative:16.7.51'
+    implementation 'com.mbridge.msdk.oversea:mbnativeadvanced:16.7.51'
+    implementation 'com.mbridge.msdk.oversea:newinterstitial:16.7.51'
+    implementation 'com.mbridge.msdk.oversea:mbbanner:16.7.51'
+    implementation 'com.mbridge.msdk.oversea:mbsplash:16.7.51'
     // china store
-    implementation 'com.mbridge.msdk.china:videojs:15.4.62'
-    implementation 'com.mbridge.msdk.china:mbjscommon:15.4.62'
-    implementation 'com.mbridge.msdk.china:playercommon:15.4.62'
-    implementation 'com.mbridge.msdk.china:reward:15.4.62'
-    implementation 'com.mbridge.msdk.china:videocommon:15.4.62'
-    implementation 'com.mbridge.msdk.china:chinasame:15.4.62'
-    implementation 'com.mbridge.msdk.china:interstitialvideo:15.4.62'
-    implementation 'com.mbridge.msdk.china:mbnative:15.4.62'
-    implementation 'com.mbridge.msdk.china:nativeex:15.4.62'
-    implementation 'com.mbridge.msdk.china:interstitial:15.4.62'
-    implementation 'com.mbridge.msdk.china:mbsplash:15.4.62'
-    implementation 'com.mbridge.msdk.china:mbnativeadvanced:15.4.62'
-    implementation 'com.mbridge.msdk.china:mbbanner:15.4.62'
-    implementation 'com.mbridge.msdk.china:interactiveads:15.4.62'
+//    implementation 'com.mbridge.msdk.china:videojs:16.7.51'
+//    implementation 'com.mbridge.msdk.china:mbjscommon:16.7.51'
+//    implementation 'com.mbridge.msdk.china:playercommon:16.7.51'
+//    implementation 'com.mbridge.msdk.china:reward:16.7.51'
+//    implementation 'com.mbridge.msdk.china:videocommon:16.7.51'
+//    implementation 'com.mbridge.msdk.china:chinasame:16.7.51'
+//    implementation 'com.mbridge.msdk.china:interstitialvideo:16.7.51'
+//    implementation 'com.mbridge.msdk.china:mbnative:16.7.51'
+//    implementation 'com.mbridge.msdk.china:nativeex:16.7.51'
+//    implementation 'com.mbridge.msdk.china:interstitial:16.7.51'
+//    implementation 'com.mbridge.msdk.china:mbsplash:16.7.51'
+//    implementation 'com.mbridge.msdk.china:mbnativeadvanced:16.7.51'
+//    implementation 'com.mbridge.msdk.china:mbbanner:16.7.51'
+//    implementation 'com.mbridge.msdk.china:interactiveads:16.7.51'
 
     // 开发者后台创建App勾选APK为YES则加上mtgdownloads依赖
 //    implementation 'com.mintegral.msdk:mtgdownloads:14.6.01'

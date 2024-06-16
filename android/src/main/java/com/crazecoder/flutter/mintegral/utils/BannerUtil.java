@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import com.mbridge.msdk.out.BannerAdListener;
 import com.mbridge.msdk.out.BannerSize;
 import com.mbridge.msdk.out.MBBannerView;
+import com.mbridge.msdk.out.MBridgeIds;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -83,44 +84,44 @@ public class BannerUtil implements BannerAdListener {
     }
 
     @Override
-    public void onLoadFailed(String msg) {
+    public void onLoadFailed(MBridgeIds ids, String msg) {
         Log.e(TAG, "on load failed"+msg);
 
     }
 
     @Override
-    public void onLoadSuccessed() {
+    public void onLoadSuccessed(MBridgeIds ids) {
 
         Log.e(TAG, "on load successed");
     }
 
     @Override
-    public void onClick() {
+    public void onClick(MBridgeIds ids) {
         Log.e(TAG, "onAdClick");
     }
 
     @Override
-    public void onLeaveApp() {
+    public void onLeaveApp(MBridgeIds ids) {
         Log.e(TAG, "leave app");
     }
 
     @Override
-    public void showFullScreen() {
+    public void showFullScreen(MBridgeIds ids) {
         Log.e(TAG, "showFullScreen");
     }
 
     @Override
-    public void closeFullScreen() {
+    public void closeFullScreen(MBridgeIds ids) {
         Log.e(TAG, "closeFullScreen");
     }
 
     @Override
-    public void onLogImpression() {
+    public void onLogImpression(MBridgeIds ids) {
         Log.e(TAG, "onLogImpression");
     }
 
     @Override
-    public void onCloseBanner() {
+    public void onCloseBanner(MBridgeIds ids) {
         Log.e(TAG, "onCloseBanner");
     }
 }

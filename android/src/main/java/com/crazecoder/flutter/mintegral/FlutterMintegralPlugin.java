@@ -15,7 +15,7 @@ import androidx.core.content.ContextCompat;
 
 import com.crazecoder.flutter.mintegral.activity.SplashAdActivity;
 import com.crazecoder.flutter.mintegral.utils.BannerUtil;
-import com.crazecoder.flutter.mintegral.utils.InteractiveAdUtil;
+//import com.crazecoder.flutter.mintegral.utils.InteractiveAdUtil;
 import com.crazecoder.flutter.mintegral.utils.InterstitialVideoUtil;
 import com.crazecoder.flutter.mintegral.utils.RewardVideoUtil;
 import com.mbridge.msdk.MBridgeConstans;
@@ -107,8 +107,8 @@ public class FlutterMintegralPlugin implements FlutterPlugin, MethodCallHandler,
                     }
 
                     @Override
-                    public void onInitFail() {
-                        Log.e("SDKInitStatus", "onInitFail");
+                    public void onInitFail(String msg) {
+                        Log.e("SDKInitStatus", "onInitFail:"+msg);
                     }
                 });
                 boolean isProtectCCPA = call.argument("isProtectCCPA");
@@ -145,10 +145,10 @@ public class FlutterMintegralPlugin implements FlutterPlugin, MethodCallHandler,
             BannerUtil.getInstance().dispose(adUnitId);
             result.success(null);
         } else if (call.method.equals("showInteractiveAD")) {
-            String adUnitId = call.argument("adUnitId").toString();
-            String placementId = call.argument("placementId").toString();
-
-            InteractiveAdUtil.getInstance().setActivity(activity).show(adUnitId, placementId);
+//            String adUnitId = call.argument("adUnitId").toString();
+//            String placementId = call.argument("placementId").toString();
+//
+//            InteractiveAdUtil.getInstance().setActivity(activity).show(adUnitId, placementId);
             result.success(null);
         } else if (call.method.equals("showInterstitialVideoAD")) {
             String adUnitId = call.argument("adUnitId").toString();

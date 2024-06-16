@@ -16,29 +16,26 @@ class MyApp extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(home: MainHome());
-  }
+  Widget build(BuildContext context) =>MaterialApp(home: MainHome());
 }
 
 class MainHome extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+  Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(
         title: const Text('Plugin example app'),
       ),
       body: Center(
         child: Column(
           children: [
-            RaisedButton(
+            TextButton(
               child: Text("banner"),
               onPressed: () {
                 Navigator.push(
                     context, MaterialPageRoute(builder: (_) => BannerAdHome()));
               },
             ),
-            RaisedButton(
+            TextButton(
               child: Text("splash"),
               onPressed: () {
                 FlutterMintegral.startSplashAd(
@@ -47,16 +44,16 @@ class MainHome extends StatelessWidget {
                 );
               },
             ),
-            RaisedButton(
-              child: Text("Interactive"),
-              onPressed: () {
-                FlutterMintegral.showInteractiveAD(
-                  adUnitId: "146878",
-                  placementId: "138790",
-                );
-              },
-            ),
-            RaisedButton(
+            // TextButton(
+            //   child: Text("Interactive"),
+            //   onPressed: () {
+            //     FlutterMintegral.showInteractiveAD(
+            //       adUnitId: "146878",
+            //       placementId: "138790",
+            //     );
+            //   },
+            // ),
+            TextButton(
               child: Text("InterstitialVideo"),
               onPressed: () {
                 FlutterMintegral.showInterstitialVideoAD(
@@ -65,7 +62,7 @@ class MainHome extends StatelessWidget {
                 );
               },
             ),
-            RaisedButton(
+            TextButton(
               child: Text("RewardVideo"),
               onPressed: () {
                 FlutterMintegral.showRewardVideoAD(
@@ -78,5 +75,4 @@ class MainHome extends StatelessWidget {
         ),
       ),
     );
-  }
 }
