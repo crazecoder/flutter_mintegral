@@ -90,7 +90,10 @@ public class FlutterMintegralPlugin implements FlutterPlugin, MethodCallHandler,
     @Override
     public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
         if (call.method.equals("initAdSDK")) {
-            checkAndRequestPermission();
+            boolean isCheckPermission = call.argument("isCheckPermission");
+            if (isCheckPermission){
+                checkAndRequestPermission();
+            }
             if (call.hasArgument("appId") && call.hasArgument("appKey")) {
                 String appId = call.argument("appId");
                 String appKey = call.argument("appKey");

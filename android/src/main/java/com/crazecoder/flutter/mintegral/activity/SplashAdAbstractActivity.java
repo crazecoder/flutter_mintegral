@@ -93,7 +93,7 @@ public abstract class SplashAdAbstractActivity extends Activity {
             return;
         }
         // 如果targetSDKVersion >= 23，就要申请好权限。如果您的App没有适配到Android6.0（即targetSDKVersion < 23），那么只需要在这里直接调用fetchSplashAD接口。
-        if (Build.VERSION.SDK_INT >= 23) {
+        if (Build.VERSION.SDK_INT >= 23&&isCheckPermission()) {
             checkAndRequestPermission();
         } else {
             initSdk(appId, appKey);
@@ -279,6 +279,8 @@ public abstract class SplashAdAbstractActivity extends Activity {
         }
         return super.onKeyDown(keyCode, event);
     }
+
+    protected abstract boolean isCheckPermission();
 
     protected abstract String getAppId();
 

@@ -9,6 +9,7 @@ class FlutterMintegral {
   static Future<Null> initSdk({
     required String appId,
     required String appKey,
+    bool isCheckPermission = true,
     /**
       * for EU-GDPR
       * false: MIntegralConstans.IS_SWITCH_ON
@@ -27,6 +28,7 @@ class FlutterMintegral {
       "appKey": appKey,
       "isProtectGDPR": isProtectGDPR,
       "isProtectCCPA": isProtectCCPA,
+      "isCheckPermission":isCheckPermission
     };
     await _channel.invokeMethod('initAdSDK', map);
   }
