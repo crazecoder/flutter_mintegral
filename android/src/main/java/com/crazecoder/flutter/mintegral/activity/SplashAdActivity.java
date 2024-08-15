@@ -2,6 +2,11 @@ package com.crazecoder.flutter.mintegral.activity;
 
 public class SplashAdActivity extends SplashAdAbstractActivity {
     @Override
+    protected boolean isCheckPermission(){
+        return true;
+    }
+
+    @Override
     protected String getAppId() {
         return null;
     }

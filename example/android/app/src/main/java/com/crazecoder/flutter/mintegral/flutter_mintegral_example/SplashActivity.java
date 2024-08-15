@@ -5,6 +5,11 @@ import com.crazecoder.flutter.mintegral.activity.SplashAdAbstractActivity;
 
 public class SplashActivity extends SplashAdAbstractActivity {
     @Override
+    protected boolean isCheckPermission(){
+        return true;
+    }
+    
+    @Override
     protected String getAppId() {
         return "118690";
     }
