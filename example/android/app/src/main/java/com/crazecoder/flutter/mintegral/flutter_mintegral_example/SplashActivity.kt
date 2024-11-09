@@ -1,46 +1,25 @@
-package com.crazecoder.flutter.mintegral.flutter_mintegral_example;
+package com.crazecoder.flutter.mintegral.flutter_mintegral_example
+
+import com.crazecoder.flutter.mintegral.activity.SplashAdAbstractActivity
 
 
-import com.crazecoder.flutter.mintegral.activity.SplashAdAbstractActivity;
-
-public class SplashActivity extends SplashAdAbstractActivity {
-    @Override
-    protected boolean isCheckPermission(){
-        return true;
-    }
-    
-    @Override
-    protected String getAppId() {
-        return "118690";
+class SplashActivity : SplashAdAbstractActivity() {
+    override fun getAppId(): String? {
+        return "118690"
     }
 
-    @Override
-    protected String getAppKey() {
-        return "7c22942b749fe6a6e361b675e96b3ee9";
+    override fun getAppKey(): String? {
+        return "7c22942b749fe6a6e361b675e96b3ee9"
     }
 
-    @Override
-    protected String getAdUnitId() {
-        return "209547";
+    override fun getAdUnitId(): String? {
+        return "209547"
     }
 
-    @Override
-    protected String getAdPlacementId() {
-        return "173349";
-    }
+    override val adPlacementId: String
+        get() = "173349"
 
-    @Override
-    protected boolean isProtectGDPR() {
-        return false;
-    }
+    override fun isBidding(): Boolean? = null
 
-    @Override
-    protected boolean isProtectCCPA() {
-        return false;
-    }
-
-    @Override
-    protected Integer getLaunchBackground() {
-        return null;
-    }
+    override val launchBackground: Int? = null
 }

@@ -9,8 +9,8 @@ public class MainActivity extends FlutterActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = new Intent(this, SplashActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(this, SplashActivity.class);
+//        startActivity(intent);
     }
 
 }

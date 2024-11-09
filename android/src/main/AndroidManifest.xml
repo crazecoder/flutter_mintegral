@@ -3,11 +3,9 @@
     package="com.crazecoder.flutter.mintegral">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!-- 如果国内流量版本SDK ，以下两条权限必须加上 -->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
     <application android:usesCleartextTraffic="true"
         android:hardwareAccelerated="true"
+        android:networkSecurityConfig="@xml/network_security_config"
         tools:targetApi="n">
         <activity android:name=".activity.SplashAdActivity"/>
     </application>

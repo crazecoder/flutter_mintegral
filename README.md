@@ -1,6 +1,6 @@
 # flutter_mintegral
 
-flutter_mintegral，Just support android，Welcome to the fork and develop ios version
+flutter_mintegral, Just support android, Welcome to the fork and develop ios version
 
 ## Getting Started
 ```yaml

@@ -6,13 +6,14 @@ buildscript {
         google()
         mavenCentral()
         maven {
-            url  "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea"
+            url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea"
+//            url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_china"
         }
 
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.0.2'
+        classpath 'com.android.tools.build:gradle:7.3.1'
     }
 }
 
@@ -21,20 +22,20 @@ rootProject.allprojects {
         google()
         mavenCentral()
         maven {
-            url  "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea"
+            url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea"
+//            url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_china"
         }
-
-        //上架GP市场应用 安卓X版本
-//        maven {
-//            url  "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea"
-//        }
     }
 }
 
 apply plugin: 'com.android.library'
+apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
-    compileSdk 31
+    if (project.android.hasProperty('namespace')) {
+        namespace "com.crazecoder.flutter.mintegral"
+    }
+    compileSdk 34
 
     defaultConfig {
         minSdkVersion 16
@@ -43,33 +44,12 @@ android {
     lintOptions {
         disable 'InvalidPackage'
     }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 }
 dependencies{
-    // google play
-    implementation 'com.mbridge.msdk.oversea:reward:16.7.51'
-    //如果您需要使用竞价广告,请添加此条依赖语句。(mbbid)
-    implementation 'com.mbridge.msdk.oversea:mbbid:16.7.51'
-    implementation 'com.mbridge.msdk.oversea:mbnative:16.7.51'
-    implementation 'com.mbridge.msdk.oversea:mbnativeadvanced:16.7.51'
-    implementation 'com.mbridge.msdk.oversea:newinterstitial:16.7.51'
-    implementation 'com.mbridge.msdk.oversea:mbbanner:16.7.51'
-    implementation 'com.mbridge.msdk.oversea:mbsplash:16.7.51'
-    // china store
-//    implementation 'com.mbridge.msdk.china:videojs:16.7.51'
-//    implementation 'com.mbridge.msdk.china:mbjscommon:16.7.51'
-//    implementation 'com.mbridge.msdk.china:playercommon:16.7.51'
-//    implementation 'com.mbridge.msdk.china:reward:16.7.51'
-//    implementation 'com.mbridge.msdk.china:videocommon:16.7.51'
-//    implementation 'com.mbridge.msdk.china:chinasame:16.7.51'
-//    implementation 'com.mbridge.msdk.china:interstitialvideo:16.7.51'
-//    implementation 'com.mbridge.msdk.china:mbnative:16.7.51'
-//    implementation 'com.mbridge.msdk.china:nativeex:16.7.51'
-//    implementation 'com.mbridge.msdk.china:interstitial:16.7.51'
-//    implementation 'com.mbridge.msdk.china:mbsplash:16.7.51'
-//    implementation 'com.mbridge.msdk.china:mbnativeadvanced:16.7.51'
-//    implementation 'com.mbridge.msdk.china:mbbanner:16.7.51'
-//    implementation 'com.mbridge.msdk.china:interactiveads:16.7.51'
-
-    // 开发者后台创建App勾选APK为YES则加上mtgdownloads依赖
-//    implementation 'com.mintegral.msdk:mtgdownloads:14.6.01'
+    implementation 'com.mbridge.msdk.oversea:mbridge_android_sdk:16.8.81'
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
 }
