@@ -5,6 +5,7 @@ class SplashAdView extends StatelessWidget {
   final String placementId;
   final String adUnitId;
   final bool isBidding;
+  final String closeText;
   final Widget? placeholder;
   final Function? onDispose;
 
@@ -13,6 +14,7 @@ class SplashAdView extends StatelessWidget {
     required this.placementId,
     required this.adUnitId,
     this.isBidding = false,
+    this.closeText = 'Skip',
     this.placeholder,
     this.onDispose,
   });
@@ -40,6 +42,7 @@ class SplashAdView extends StatelessWidget {
             "placementId": placementId,
             "adUnitId": adUnitId,
             "isBidding": isBidding,
+            "closeText": closeText,
           },
         ),
         placeholder == null
