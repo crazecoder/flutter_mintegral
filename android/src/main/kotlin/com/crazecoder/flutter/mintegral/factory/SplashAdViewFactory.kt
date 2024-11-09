@@ -24,6 +24,7 @@ class SplashAdViewFactory(private val messenger: BinaryMessenger, private val ac
         val param = args as Map<String, Any>
         val placementId = param["placementId"]?.toString()
         val adUnitId = param["adUnitId"]?.toString()
+        val closeText = param["closeText"]?.toString()
         val channelName = "splash_$adUnitId"
 
         val methodChannel = MethodChannel(messenger, channelName)
@@ -32,7 +33,7 @@ class SplashAdViewFactory(private val messenger: BinaryMessenger, private val ac
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.MATCH_PARENT
         )
-        val splashAdManager = SplashAdManager(activity, view, onLoadSuccessed = {
+        val splashAdManager = SplashAdManager(activity, view,closeText?:"Skip", onLoadSuccessed = {
             methodChannel.invokeMethod("onLoadSuccessed",null)
         }){
             methodChannel.invokeMethod("onDismissAndFailed",null)
