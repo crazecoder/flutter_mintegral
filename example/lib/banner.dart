@@ -16,12 +16,12 @@ class _BannerAdHomeState extends State<BannerAdHome> {
       
   void initState() {
     super.initState();
-    FlutterMintegral.showBannerAD(adUnitId: "146879", placementId: "138791");
+    FlutterMintegral.showBannerAD(adUnitId: "3833824", placementId: "1897304",isBidding: true,bannerSizeType: BannerSize.SMART_TYPE);
   }
 
   @override
   void dispose() {
-    FlutterMintegral.disposeBannerAD(adUnitId: "146879");
+    FlutterMintegral.disposeBannerAD(adUnitId: "3833824");
     super.dispose();
   }
 }
