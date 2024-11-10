@@ -50,11 +50,12 @@ class MIntegralSDKManager {
         sdk.setDoNotTrackStatus(activity, isProtectCCPA)
     }
 
-    fun fetchBidToken(params: CommonBidRequestParams, onToken: (String) -> Unit) {
+    fun fetchBidToken(params: CommonBidRequestParams, onToken: (String?) -> Unit) {
         val manager = BidManager(params)
         manager.setBidListener(object : BidListennning {
             override fun onFailed(msg: String) {
-                LogUtil.e(this@MIntegralSDKManager, msg)
+                LogUtil.e(this@MIntegralSDKManager, "fetchBidToken onFailed: $msg")
+                onToken.invoke(null)
             }
 
             override fun onSuccessed(bidResponsed: BidResponsed) {
@@ -64,11 +65,12 @@ class MIntegralSDKManager {
         manager.bid()
     }
 
-    fun fetchBidToken(placementId: String, adUnitId: String, onToken: (String) -> Unit) {
+    fun fetchBidToken(placementId: String, adUnitId: String, onToken: (String?) -> Unit) {
         val manager = BidManager(placementId, adUnitId)
         manager.setBidListener(object : BidListennning {
             override fun onFailed(msg: String) {
-                LogUtil.e(this, msg)
+                LogUtil.e(this@MIntegralSDKManager, "fetchBidToken onFailed: $msg")
+                onToken.invoke(null)
             }
 
             override fun onSuccessed(bidResponsed: BidResponsed) {
