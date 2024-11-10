@@ -9,20 +9,23 @@ class BannerSize {
   static const int STANDARD_TYPE = 4;
   static const int DEV_SET_TYPE = 5;
 
-  static Size getSize(BuildContext context,int type){
-    switch(type){
+  static Size getSize(BuildContext context, int type) {
+    switch (type) {
       case LARGE_TYPE:
         return largeSize();
       case MEDIUM_TYPE:
         return mediumSize();
       case SMART_TYPE:
-        return smartSize(MediaQuery.of(context).size.width > 720);
+        return smartSize(MediaQuery.of(context).size.width *
+                MediaQuery.of(context).devicePixelRatio >
+            720);
       case STANDARD_TYPE:
         return standardSize();
       default:
         return devSetSize();
     }
   }
+
   static Size largeSize() {
     return Size(320, 90);
   }
